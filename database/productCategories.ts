@@ -61,7 +61,7 @@ export const getProductCategoriesTotalInsecure = async () => {
 };
 
 export const getCategoryInsecure = cache(async (id: number) => {
-  const [productCategory] = await sql<{ id: number | null; imageUrl: string | null; categoryName: string | null; parentCategoryId: number | null }[]>`
+  const [productCategory] = await sql<{ id: number; imageUrl: string; categoryName: string; parentCategoryId: number | null }[]>`
     SELECT
       *
     FROM

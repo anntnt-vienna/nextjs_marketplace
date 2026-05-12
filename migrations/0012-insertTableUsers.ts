@@ -62,7 +62,7 @@ export async function up(sql: Sql) {
     let roleId = roleIdByName.get(user.roleName);
 
     if (!roleId) {
-      const [newRole] = await sql<{ id: number | null }[]>`
+      const [newRole] = await sql<{ id: number }[]>`
         INSERT INTO roles (name)
         VALUES (${user.roleName})
         RETURNING id

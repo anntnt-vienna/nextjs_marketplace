@@ -225,14 +225,27 @@ export const getCategoryProductsInsecure = cache(
 export const getCategoryProductWithSellerInsecure = cache(
   async (productId: number) => {
     const [productRaw] = await sql<
-      (Omit<ProductWithSeller, 'price'> & { price: string })[]
+      {
+        id: number;
+        name: string;
+        brand: string | null;
+        price: number;
+        imageUrl: string;
+        description: string;
+        size: string | null;
+        color: string | null;
+        sellerId: number;
+        categoryId: number | null;
+        storeName: string;
+        categoryName: string | null;
+      }[]
     >`
       SELECT
         products.*,
         COALESCE(
-          NULLIF(users.store_name, ''),
+          NULLIF(users.store_name::text, ''),
           users.firstname || ' ' || users.lastname
-        ) AS "storeName",
+        )::text AS "storeName",
         product_categories.category_name AS "categoryName"
       FROM
         products
@@ -277,14 +290,14 @@ export const getProductsOfSeller = cache(
       {
         id: number;
         name: string;
-        price: string;
+        brand: string | null;
+        price: number;
         imageUrl: string;
         description: string;
         size: string | null;
         color: string | null;
         sellerId: number;
         categoryId: number | null;
-        brand: string | null;
       }[]
     >`
       SELECT products.*
@@ -314,7 +327,7 @@ export const removeProduct = cache(
       {
         id: number;
         name: string;
-        price: string;
+        price: number;
         imageUrl: string;
         description: string;
         size: string | null;
@@ -352,7 +365,7 @@ export const updateProduct = cache(
       {
         id: number;
         name: string;
-        price: string;
+        price: number;
         imageUrl: string;
         description: string;
         size: string | null;
@@ -398,7 +411,7 @@ export const updateProductWithoutImage = cache(
       {
         id: number;
         name: string;
-        price: string;
+        price: number;
         imageUrl: string;
         description: string;
         size: string | null;
@@ -441,7 +454,7 @@ export async function getProductsByIds(ids: number[]): Promise<Product[]> {
     {
       id: number;
       name: string;
-      price: string;
+      price: number;
       imageUrl: string;
       description: string;
       size: string | null;

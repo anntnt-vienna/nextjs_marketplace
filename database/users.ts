@@ -61,7 +61,7 @@ export const getUserByEmailInsecure = cache(async (emailAddress: User['emailAddr
   const [user] = await sql<UserWithEmail[]>`
     SELECT
       id,
-      email_address AS emailAddress
+      email_address AS "emailAddress"
     FROM
       users
     WHERE
@@ -138,8 +138,16 @@ export const getUserWithPasswordHashInsecure = cache(
 export const getUserByStoreNameInsecure = cache(async (storeName: string) => {
   const [user] = await sql<User[]>`
     SELECT
-      id,
-      store_name AS "storeName"
+      users.id,
+      users.username,
+      users.firstname,
+      users.lastname,
+      users.email_address,
+      users.birthday,
+      users.gender,
+      users.store_name,
+      users.address,
+      users.role_id
     FROM
       users
     WHERE
