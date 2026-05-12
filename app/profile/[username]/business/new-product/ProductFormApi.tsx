@@ -131,6 +131,15 @@ export default function ProductFormApi(props: Props) {
             onChange={(event) => handleFileChange(event)}
           />
         </label>
+        {imageUrl && (
+          <div className="mt-3 overflow-hidden rounded-lg border border-brand-muted/30 bg-brand-surface">
+            <img
+              src={imageUrl}
+              alt="Selected product preview"
+              className="h-auto w-full object-cover"
+            />
+          </div>
+        )}        
         <label className="block mb-2 text-sm font-medium text-brand-text dark:text-dark-text">
           Description
           <textarea

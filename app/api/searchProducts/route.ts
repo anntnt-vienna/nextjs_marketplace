@@ -39,7 +39,7 @@ export async function GET(request: NextRequest): Promise<NextResponse<ProductRes
     {
       id: number;
       name: string;
-      price: string;
+      price: number;
       imageUrl: string;
       description: string;
       size: string | null;

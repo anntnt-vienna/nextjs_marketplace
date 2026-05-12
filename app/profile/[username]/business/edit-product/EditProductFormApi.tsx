@@ -1,6 +1,6 @@
 'use client';
 import Image from 'next/image';
-import { redirect, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import type { ProductCategory } from '../../../../../database/productCategories';
 import type { Product } from '../../../../../database/products';

@@ -61,6 +61,7 @@ export async function PUT(
           imageUrl: result.data.imageUrl,
           description: result.data.description,
           categoryId: result.data.categoryId,
+          brand: null,
           size: null,
           color: null,
         }))) ||
@@ -70,6 +71,7 @@ export async function PUT(
           price: result.data.price,
           description: result.data.description,
           categoryId: result.data.categoryId,
+          brand: null,
           size: null,
           color: null,
         })));

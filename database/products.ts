@@ -57,14 +57,14 @@ export const createProduct = cache(
       {
         id: number;
         name: string;
-        price: string;
+        brand: string | null;
+        price: number;
         imageUrl: string;
         description: string;
         size: string | null;
         color: string | null;
         sellerId: number;
         categoryId: number | null;
-        brand: string | null;
       }[]
     >`
       INSERT INTO
@@ -113,14 +113,14 @@ export const getProductsInsecure = cache(async () => {
     {
       id: number;
       name: string;
-      price: string;
+      brand: string | null;
+      price: number;
       imageUrl: string;
       description: string;
       size: string | null;
       color: string | null;
       sellerId: number;
       categoryId: number | null;
-      brand: string | null;
     }[]
   >`
     SELECT
@@ -144,7 +144,7 @@ export const getProductInsecure = cache(async (id: number) => {
     {
       id: number;
       name: string;
-      price: string;
+      price: number;
       imageUrl: string;
       description: string;
       size: string | null;
@@ -189,7 +189,7 @@ export const getCategoryProductsInsecure = cache(
       {
         id: number;
         name: string;
-        price: string;
+        price: number;
         imageUrl: string;
         description: string;
         size: string | null;
