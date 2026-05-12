@@ -6,8 +6,8 @@ type Props = {
   };
 };
 
-export default async function Page({ searchParams }: Props) {
-  const params = await searchParams; // ← REQUIRED 
+export default function Page({ searchParams }: Props) {
+  const params = searchParams; // ← REQUIRED 
   const query = params.query ?? ''; // ← use params, not searchParams
 
   return (

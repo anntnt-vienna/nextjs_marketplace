@@ -15,14 +15,14 @@ export const getSearchProductsInsecure = cache(async (query: string) => {
     {
       id: number;
       name: string;
-      price: string;
+      brand: string | null;
+      price: number;
       imageUrl: string;
       description: string;
       size: string | null;
       color: string | null;
       sellerId: number;
       categoryId: number | null;
-      brand: string | null;
     }[]
   >`
     SELECT
@@ -56,14 +56,14 @@ export const getSearchProductsPaginatedInsecure = cache(
       {
         id: number;
         name: string;
-        price: string;
+        brand: string | null;
+        price: number;
         imageUrl: string;
         description: string;
         size: string | null;
         color: string | null;
         sellerId: number;
         categoryId: number | null;
-        brand: string | null;
       }[]
     >`
       SELECT

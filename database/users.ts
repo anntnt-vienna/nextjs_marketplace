@@ -58,7 +58,12 @@ export const getUserInsecure = cache(async (username: User['username']) => {
 });
 
 export const getUserByEmailInsecure = cache(async (emailAddress: User['emailAddress']) => {
-  const [user] = await sql<UserWithEmail[]>`
+  const [user] = await sql<
+    {
+      id: number;
+      emailAddress: string;
+    }[]
+  >`
     SELECT
       id,
       email_address AS "emailAddress"
@@ -68,8 +73,14 @@ export const getUserByEmailInsecure = cache(async (emailAddress: User['emailAddr
       email_address = ${emailAddress}
   `;
 
-  return user;
+  if (!user) return undefined;
+
+  return {
+    id: user.id,
+    emailAddress: user.emailAddress,
+  };
 });
+
 
 export const createUserInsecure = cache(
   async (
