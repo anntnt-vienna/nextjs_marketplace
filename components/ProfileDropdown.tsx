@@ -28,11 +28,9 @@ export default function ProfileDropdown({ user, onOpenChange }: ProfileDropdownP
 
   const closeDropdown = useCallback(
     (restoreFocus = true) => {
-      console.log('[ProfileDropdown] closeDropdown called', { restoreFocus });
       setIsOpen(false);
       onOpenChange?.(false);
       if (restoreFocus) {
-        console.log('[ProfileDropdown] restoring focus to button');
         requestAnimationFrame(() => buttonRef.current?.focus());
       }
     },
@@ -94,11 +92,6 @@ export default function ProfileDropdown({ user, onOpenChange }: ProfileDropdownP
   const handleMenuKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key !== 'Tab') return;
     const focusable = dropdownRef.current?.querySelectorAll<HTMLElement>(focusableSelectors);
-    console.log('[ProfileDropdown] Tab press detected', {
-      shift: event.shiftKey,
-      focusableCount: focusable?.length ?? 0,
-      active: document.activeElement,
-    });
     if (!focusable || focusable.length === 0) return;
 
     const first = focusable[0];
@@ -110,7 +103,6 @@ export default function ProfileDropdown({ user, onOpenChange }: ProfileDropdownP
       pendingFocusDir.current = 'prev';
       active.blur();
       closeDropdown(false);
-      console.log('[ProfileDropdown] Shift+Tab on first item → queue prev focus');
       return;
     }
 
@@ -119,13 +111,8 @@ export default function ProfileDropdown({ user, onOpenChange }: ProfileDropdownP
       pendingFocusDir.current = 'next';
       active.blur();
       closeDropdown(false);
-      console.log('[ProfileDropdown] Tab on last item → queue next focus');
     }
   };
-
-  useEffect(() => {
-    console.log('[ProfileDropdown] isOpen changed', { isOpen, active: document.activeElement });
-  }, [isOpen]);
 
   useEffect(() => {
     if (!isOpen && pendingFocusDir.current) {
@@ -143,10 +130,6 @@ export default function ProfileDropdown({ user, onOpenChange }: ProfileDropdownP
             detail: { direction: dir, sender: buttonRef.current },
           })
         );
-        console.log('[ProfileDropdown] nav:neighbor-focus dispatched from button', {
-          direction: dir,
-          button: buttonRef.current,
-        });
       });
     }
   }, [isOpen]);
@@ -170,12 +153,6 @@ export default function ProfileDropdown({ user, onOpenChange }: ProfileDropdownP
         focus-visible:ring-2 focus-visible:ring-brand-warning focus-visible:ring-offset-2 
         focus-visible:ring-offset-brand-secondary dark:text-dark-text"
         onClick={handleButtonClick}
-        onFocus={() =>
-          console.log('[ProfileDropdown] button focused', {
-            isOpen,
-            active: document.activeElement,
-          })
-        }
       >
         <svg
           className="h-6 w-6 text-white transition-colors group-hover:text-brand-warning group-focus:text-brand-warning group-active:text-brand-warning dark:text-brand-accent dark:group-hover:text-brand-warning dark:group-focus:text-brand-warning dark:group-active:text-brand-warning"

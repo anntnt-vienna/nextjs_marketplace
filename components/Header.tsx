@@ -89,7 +89,6 @@ export default function Header(props: UserProps) {
       const dir = direction as 'next' | 'prev' | undefined;
       const origin = sender as HTMLElement | undefined;
 
-      console.log('[Header] nav:neighbor-focus received', { dir, origin });
       if (!dir || !origin) {
         console.warn('[Header] Missing direction or sender, aborting focus move');
         return;
@@ -120,7 +119,6 @@ export default function Header(props: UserProps) {
         console.warn('[Header] No target nav item found for direction', dir);
         return;
       }
-      console.log('[Header] Moving focus to', target);
       target.focus();
     };
 

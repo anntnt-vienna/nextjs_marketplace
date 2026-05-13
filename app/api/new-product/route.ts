@@ -65,8 +65,7 @@ export async function POST(
     }
 
     return NextResponse.json({ product: newProduct });
-  } catch (error) {
-    console.log('error: ', error);
+  } catch {
     return NextResponse.json({
       error: 'Image upload failed',
     });
